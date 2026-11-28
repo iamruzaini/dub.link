@@ -144,6 +144,12 @@ jobs:
           cat /tmp/qstash.log
           exit 1
 
+      # tinybird-cli doesn't support the runner's default Python (3.14+)
+      - name: Setup Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+
       - name: Configure Tinybird Local
         working-directory: packages/tinybird
         run: |

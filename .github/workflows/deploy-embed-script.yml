@@ -18,9 +18,17 @@ jobs:
 
       - name: Setup pnpm
         uses: pnpm/action-setup@v3
+
+      - name: Setup Node.js
+        uses: actions/setup-node@v4
         with:
-          version: 8
-      - name: Install dependencies & build
+          node-version: 20
+          cache: "pnpm"
+
+      - name: Install dependencies
+        run: pnpm install --frozen-lockfile --filter @dub/embed-core...
+
+      - name: Build
         run: pnpm --filter @dub/embed-core build
 
       # - name: Deploy to Cloudflare Pages (https://www.dubcdn.com/embed/script.js)
